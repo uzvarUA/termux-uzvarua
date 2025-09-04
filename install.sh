@@ -3,10 +3,10 @@
 clear
 echo "UzvarUa"
 echo "Виберіть модуля"
-echo "1) оновлення пакетів"
+echo "1) Оновлення пакетів"
 echo "2) Встановлення proot python tur-repo"
 echo "3) Встановлення thc-hydra make mandoc"
-echo "4)  Встановлення libjpeg-turbo libpng zlib"
+echo "4) Встановлення libjpeg-turbo libpng zlib"
 echo "5) Встановлення openssh rust"
 echo "6) Встановлення ffmpeg"
 echo "7) Встановлення yt-dlp"
