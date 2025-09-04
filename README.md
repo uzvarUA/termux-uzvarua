@@ -9,3 +9,6 @@
 3. ```bash
    git clone https://github.com/uzvarUA/termux-uzvarua
    ```
+4. ```bash
+   cd $HOME/termux-uzvarua && chmod +x install.sh && ./install.sh
+   ```
