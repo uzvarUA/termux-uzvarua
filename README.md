@@ -1,14 +1,14 @@
 ```
-termux-uzvarua/
-|- module/
-|  |- ffmpeg.sh
-|  |- libjpeg-turbo_libpng_zlib.sh
-|  |- openssl_rust.sh
-|  |- proot_python_tur-repo.sh
-|  |- thc-hydra_make_mandoc.sh
-|  |- update.sh
-|  |- yt-dlp.sh
-|- install.sh
+├── install.sh
+├── module/
+│   ├── ffmpeg.sh
+│   ├── libjpeg-turbo_libpng_zlib.sh
+│   ├── openssl_rust.sh
+│   ├── proot_python_tur-repo.sh
+│   ├── thc-hydra_make_mandoc.sh
+│   ├── update.sh
+│   └── yt-dlp.sh
+
 ```
 ***
 
