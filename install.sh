@@ -3,6 +3,7 @@
 clear
 echo "UzvarUa"
 echo "Виберіть модуля"
+echo "0) Встановлення bc"
 echo "1) Оновлення пакетів"
 echo "2) Встановлення proot python tur-repo"
 echo "3) Встановлення thc-hydra make mandoc"
@@ -14,6 +15,7 @@ echo "8) Вийти"
 
 read -p "Виберіть опцію: " opt
 case "$opt" in
+	0) bash module/bc.sh ;;
 	1) bash module/update.sh ;;
 	2) bash module/proot_python_tur-repo.sh ;;
 	3) bash module/thc-hydra_make_mandoc.sh ;;
