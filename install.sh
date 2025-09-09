@@ -12,6 +12,7 @@ echo "5) Встановлення openssh rust"
 echo "6) Встановлення ffmpeg"
 echo "7) Встановлення yt-dlp"
 echo "8) Вийти"
+echo "9) Встановлення findutils та which"
 
 read -p "Виберіть опцію: " opt
 case "$opt" in
@@ -24,5 +25,6 @@ case "$opt" in
 	6) bash module/ffmpeg.sh ;;
 	7) bash module/yt-dlp.sh ;;
 	8) echo "Вийти" && exit ;;
+ 	9) bash module/findutils.sh ;;
 	*) echo "Не правильно"
 esac
