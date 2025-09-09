@@ -13,6 +13,7 @@ echo "6) Встановлення ffmpeg"
 echo "7) Встановлення yt-dlp"
 echo "8) Вийти"
 echo "9) Встановлення findutils та which"
+echo "10) Відео монтаж"
 
 read -p "Виберіть опцію: " opt
 case "$opt" in
@@ -26,5 +27,6 @@ case "$opt" in
 	7) bash module/yt-dlp.sh ;;
 	8) echo "Вийти" && exit ;;
  	9) bash module/findutils.sh ;;
-	*) echo "Не правильно"
+  	10) bash video/check-tools.sh ;;
+	*) echo "Не правильно" ;;
 esac
