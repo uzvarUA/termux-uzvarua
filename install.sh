@@ -14,6 +14,8 @@ echo "7) Встановлення yt-dlp"
 echo "8) Вийти"
 echo "9) Встановлення findutils та which"
 echo "10) Відео монтаж"
+echo "11) Встановлення cURL та jq"
+echo "12) Завантажити із Reddit"
 
 read -p "Виберіть опцію: " opt
 case "$opt" in
@@ -28,5 +30,7 @@ case "$opt" in
 	8) echo "Вийти" && exit ;;
  	9) bash module/findutils.sh ;;
   	10) bash video/check-tools.sh ;;
+   	11) bash module/curl_jq.sh ;;
+	12) bash video/robby.sh ;;
 	*) echo "Не правильно" ;;
 esac
