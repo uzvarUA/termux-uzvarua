@@ -14,9 +14,9 @@ echo -e "${YELLOW}🔧 Зміна репозиторіїв...${RESET}"
 termux-change-repo
 
 echo -e "${YELLOW}📡 Оновлення списку пакетів...${RESET}"
-pkg update -y
+apt update -y
 
 echo -e "${YELLOW}⬆️ Оновлення встановлених пакетів...${RESET}"
-pkg upgrade -y
+apt upgrade -y
 
 echo -e "${GREEN}✅ Успішно завершено!${RESET}"
