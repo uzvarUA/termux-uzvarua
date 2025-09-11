@@ -16,6 +16,7 @@ echo "9️⃣ Встановлення findutils та which"
 echo "🔟 Відео монтаж"
 echo "1️⃣1️⃣ Встановлення cURL та jq"
 echo "1️⃣2️⃣ Завантажити із Reddit"
+echo "1️⃣3️⃣ Тікток"
 
 # Функція перевірки та запуску
 run_script() {
@@ -43,5 +44,6 @@ case "$opt" in
     10) run_script "video/check-tools.sh" ;;
     11) run_script "module/curl_jq.sh" ;;
     12) run_script "video/robby.sh" ;;
+    13) run_script "tikttok/tik_tok.sh" ;;
     *) echo -e "\e[1;31m❌ Невірна опція. Спробуйте ще раз.\e[0m" ;;
 esac
