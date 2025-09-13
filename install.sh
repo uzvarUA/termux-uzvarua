@@ -18,6 +18,8 @@ echo "1️⃣1️⃣ Встановлення cURL та jq"
 echo "1️⃣2️⃣ Завантажити із Reddit"
 echo "1️⃣3️⃣ Тікток"
 echo "1️⃣4️⃣ Інформація"
+echo "1️⃣5️⃣ Визначення архітектури Android-пристрою"
+echo "1️⃣6️⃣ Встановлення x11-repo"
 
 # Функція перевірки та запуску
 run_script() {
@@ -47,5 +49,7 @@ case "$opt" in
     12) run_script "video/robby.sh" ;;
     13) run_script "tikttok/tik_tok.sh" ;;
     14) run_script "module/jerry.sh" ;;
+    15) run_script "uzvar/jerry.sh" ;;
+    16) run_script "module/x11-repo.sh" ;;
     *) echo -e "\e[1;31m❌ Невірна опція. Спробуйте ще раз.\e[0m" ;;
 esac
