@@ -20,6 +20,7 @@ echo "1️⃣3️⃣ Тікток"
 echo "1️⃣4️⃣ Інформація"
 echo "1️⃣5️⃣ Визначення архітектури Android-пристрою"
 echo "1️⃣6️⃣ Встановлення x11-repo"
+echo "1️⃣7️⃣ Запуск X11 сервер і XFCE4 сесію"
 
 # Функція перевірки та запуску
 run_script() {
@@ -51,5 +52,6 @@ case "$opt" in
     14) run_script "module/jerry.sh" ;;
     15) run_script "uzvar/jerry.sh" ;;
     16) run_script "module/x11-repo.sh" ;;
+    17) run_script "start/start_xfce.sh" ;;
     *) echo -e "\e[1;31m❌ Невірна опція. Спробуйте ще раз.\e[0m" ;;
 esac
