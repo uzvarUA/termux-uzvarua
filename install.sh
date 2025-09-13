@@ -21,6 +21,7 @@ echo "1️⃣4️⃣ Інформація"
 echo "1️⃣5️⃣ Визначення архітектури Android-пристрою"
 echo "1️⃣6️⃣ Встановлення x11-repo"
 echo "1️⃣7️⃣ Запуск X11 сервер і XFCE4 сесію"
+echo "1️⃣8️⃣ Створення запуск Termux-11 з XFCE4…"
 
 # Функція перевірки та запуску
 run_script() {
@@ -53,5 +54,6 @@ case "$opt" in
     15) run_script "uzvar/jerry.sh" ;;
     16) run_script "module/x11-repo.sh" ;;
     17) run_script "start/start_xfce.sh" ;;
+    18) run_script "start/mine.sh" ;;
     *) echo -e "\e[1;31m❌ Невірна опція. Спробуйте ще раз.\e[0m" ;;
 esac
