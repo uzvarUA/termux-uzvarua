@@ -25,7 +25,7 @@ echo "1️⃣8️⃣ Створення запуску Termux-11 з XFCE4…"
 echo "1️⃣9️⃣ Встановлення Maigret"
 echo "2️⃣0️⃣ Встановлення Mr. Holmes"
 echo "2️⃣1️⃣ Запуск Mr. Holmes"
-echo "2️⃣2️⃣ Клонування та збірка asciinema"
+echo "2️⃣2️⃣ Встановлення asciinema"
 
 # Функція перевірки та запуску
 run_script() {
