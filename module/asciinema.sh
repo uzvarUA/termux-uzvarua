@@ -1,28 +1,23 @@
+
 #!/data/data/com.termux/files/usr/bin/bash
 
-# 📁 Робоча директорія
-WORKDIR="$HOME/termux-uzvarua/asciinema"
-LOGFILE="$HOME/termux-uzvarua/asciinema_build.log"
+# 🎬 UzvarUA: Встановлення asciinema через proot -0
+# Автор: Роббі & Copilot ✨
 
-# 🧹 Очистка попередньої спроби
-rm -rf "$WORKDIR"
-mkdir -p "$(dirname "$LOGFILE")"
-echo "🧹 Очищено стару директорію" | tee "$LOGFILE"
+LOG="$HOME/.asciinema_install.log"
+PKG="asciinema"
 
-# 🌀 Клонування репозиторію
-echo "📥 Клоную asciinema з GitHub..."
-git clone https://github.com/asciinema/asciinema "$WORKDIR" >> "$LOGFILE" 2>&1
+echo "🔧 Запуск через proot -0..." | tee -a "$LOG"
 
-# 📂 Перехід у директорію
-cd "$WORKDIR" || { echo "❌ Не вдалося перейти в $WORKDIR"; exit 1; }
+proot -0 bash -c "
+  echo '📦 Оновлення списку пакетів...' && \
+  apt update -y && \
+  echo '📥 Встановлення $PKG...' && \
+  apt install $PKG -y
+" >> "$LOG" 2>&1
 
-# 🛠️ Компіляція
-echo "🔧 Компілюю з cargo..."
-cargo build --release >> "$LOGFILE" 2>&1
-
-# ✅ Перевірка результату
-if [[ -f "$WORKDIR/target/release/asciinema" ]]; then
-    echo "✅ Успішно зібрано! Бінарник: $WORKDIR/target/release/asciinema"
+if command -v asciinema >/dev/null 2>&1; then
+  echo "✅ $PKG успішно встановлено! Версія: $(asciinema --version)" | tee -a "$LOG"
 else
-    echo "❌ Помилка компіляції. Перевір лог: $LOGFILE"
+  echo "⚠️ Встановлення не вдалося. Перевір лог: $LOG" | tee -a "$LOG"
 fi
