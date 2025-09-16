@@ -25,6 +25,7 @@ echo "1️⃣8️⃣ Створення запуску Termux-11 з XFCE4…"
 echo "1️⃣9️⃣ Встановлення Maigret"
 echo "2️⃣0️⃣ Встановлення Mr. Holmes"
 echo "2️⃣1️⃣ Запуск Mr. Holmes"
+echo "2️⃣2️⃣ Клонування та збірка asciinema"
 
 # Функція перевірки та запуску
 run_script() {
@@ -61,5 +62,6 @@ case "$opt" in
     19) run_script "module/maigret.sh" ;;
     20) run_script "module/mr_holmes.sh" ;;
     21) run_script "robby/uzvarua.sh" ;;
+    22) run_script "module/asciinema.sh" ;;
     *) echo -e "\e[1;31m❌ Невірна опція. Спробуйте ще раз.\e[0m" ;;
 esac
