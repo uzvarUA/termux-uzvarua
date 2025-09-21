@@ -52,6 +52,6 @@ cat > UzvarManifest/manifest.json <<EOF
 EOF
 
 # 📋 Копіювання UUID
-termux-clipboard-set "$uuid_header"
+# termux-clipboard-set "$uuid_header"
 echo "✅ manifest.json створено в UzvarManifest/"
-echo "📋 UUID паку скопійовано в буфер!"
+# echo "📋 UUID паку скопійовано в буфер!"
