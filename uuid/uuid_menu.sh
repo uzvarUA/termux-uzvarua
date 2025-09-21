@@ -1,7 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-clear
-echo -e "\e[1;32m UUID і manifest.json \e[0m"
 # 🧪 Перевірка Python
 if ! command -v python &> /dev/null; then
   echo "⚠️ Python не знайдено! Встановлюю..."
@@ -17,20 +15,27 @@ fi
 # 🌿 Введення даних
 read -p "📦 Назва паку: " packname
 read -p "📝 Опис: " description
-read -p "🎮 Введіть мінімальну версію Minecraft (наприклад, 1,21,0): " version
+read -p "🎮 Мінімальна версія Minecraft (1,21,0 або 1 21 0): " version_raw
 
-# 🧪 Перевірка формату версії
-if [[ ! "$version" =~ ^[0-9]+,[0-9]+,[0-9]+$ ]]; then
-  echo "⚠️ Невірний формат версії! Використовуй формат: 1,21,0"
+# 🔁 Автоформатування версії
+version_clean=${version_raw// /,}
+if [[ ! "$version_clean" =~ ^[0-9]+,[0-9]+,[0-9]+$ ]]; then
+  echo "⚠️ Невірний формат! Використовуйте 1,21,0 або 1 21 0"
   exit 1
 fi
+version_json=${version_clean//,/ }
 
-# 🆔 Генерація UUID
+# 🆔 UUID
 uuid_header=$(python -c "import uuid; print(uuid.uuid4())")
 uuid_module=$(python -c "import uuid; print(uuid.uuid4())")
 
-# 📁 Створення manifest.json
-mkdir -p UzvarManifest
+# 📁 Створення структури
+mkdir -p UzvarManifest/textures/ui
+for i in {0..5}; do
+  touch UzvarManifest/textures/ui/panorama_${i}.png
+done
+
+# 📜 manifest.json
 cat > UzvarManifest/manifest.json <<EOF
 {
   "format_version": 2,
@@ -39,7 +44,7 @@ cat > UzvarManifest/manifest.json <<EOF
     "description": "$description",
     "uuid": "$uuid_header",
     "version": [1, 0, 0],
-    "min_engine_version": [${version//,/ }]
+    "min_engine_version": [${version_json}]
   },
   "modules": [
     {
@@ -51,7 +56,6 @@ cat > UzvarManifest/manifest.json <<EOF
 }
 EOF
 
-# 📋 Копіювання UUID
-# termux-clipboard-set "$uuid_header"
-echo "✅ manifest.json створено в UzvarManifest/"
-# echo "📋 UUID паку скопійовано в буфер!"
+# ✅ Завершення
+echo "✅ Структура ресурс-паку створена в UzvarManifest/"
+echo "📁 Включає: manifest.json + textures/ui/"
