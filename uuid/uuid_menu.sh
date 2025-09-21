@@ -1,5 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
+clear
+echo -e "\e[1;32m UUID і manifest.json \e[pm"
 # 🧪 Перевірка Python
 if ! command -v python &> /dev/null; then
   echo "⚠️ Python не знайдено! Встановлюю..."
@@ -12,48 +14,32 @@ if ! command -v pip3 &> /dev/null; then
   pkg install python-pip -y
 fi
 
-# 🧙 УзварUA UUID Меню
-clear
-echo "🌿 UzvarUA UUID & manifest.json генератор"
-echo "────────────────────────────────────────"
-echo "1️⃣  Згенерувати UUIDv4"
-echo "2️⃣  Згенерувати UUIDv5 (на основі імені)"
-echo "3️⃣  Створити manifest.json для Minecraft PE"
-echo "0️⃣  Вихід"
-echo "────────────────────────────────────────"
-read -p "🔸 Вибери опцію: " choice
+# 🌿 Введення даних
+read -p "📦 Назва паку: " packname
+read -p "📝 Опис: " description
+read -p "🎮 Введіть мінімальну версію Minecraft (наприклад, 1,21,0): " version
 
-case $choice in
-  1)
-    uuid=$(python -c "import uuid; print(uuid.uuid4())")
-    echo "🆔 UUIDv4: $uuid"
-    termux-clipboard-set "$uuid"
-    echo "📋 Скопійовано в буфер!"
-    ;;
+# 🧪 Перевірка формату версії
+if [[ ! "$version" =~ ^[0-9]+,[0-9]+,[0-9]+$ ]]; then
+  echo "⚠️ Невірний формат версії! Використовуй формат: 1,21,0"
+  exit 1
+fi
 
-  2)
-    read -p "🔹 Введи ім’я для UUIDv5: " name
-    uuid=$(python -c "import uuid; print(uuid.uuid5(uuid.NAMESPACE_DNS, '$name'))")
-    echo "🆔 UUIDv5: $uuid"
-    termux-clipboard-set "$uuid"
-    echo "📋 Скопійовано в буфер!"
-    ;;
+# 🆔 Генерація UUID
+uuid_header=$(python -c "import uuid; print(uuid.uuid4())")
+uuid_module=$(python -c "import uuid; print(uuid.uuid4())")
 
-  3)
-    read -p "📦 Назва паку: " packname
-    read -p "📝 Опис: " description
-    uuid_header=$(python -c "import uuid; print(uuid.uuid4())")
-    uuid_module=$(python -c "import uuid; print(uuid.uuid4())")
-
-    mkdir -p UzvarManifest
-    cat > UzvarManifest/manifest.json <<EOF
+# 📁 Створення manifest.json
+mkdir -p UzvarManifest
+cat > UzvarManifest/manifest.json <<EOF
 {
   "format_version": 2,
   "header": {
     "name": "$packname",
     "description": "$description",
     "uuid": "$uuid_header",
-    "version": [1, 0, 0]
+    "version": [1, 0, 0],
+    "min_engine_version": [${version//,/ }]
   },
   "modules": [
     {
@@ -65,17 +51,7 @@ case $choice in
 }
 EOF
 
-    echo "✅ manifest.json створено в UzvarManifest/"
-    termux-clipboard-set "$uuid_header"
-    echo "📋 UUID паку скопійовано в буфер!"
-    ;;
-
-  0)
-    echo "👋 До зустрічі, UzvarUA-чарівнику!"
-    exit
-    ;;
-
-  *)
-    echo "⚠️ Невірний вибір!"
-    ;;
-esac
+# 📋 Копіювання UUID
+termux-clipboard-set "$uuid_header"
+echo "✅ manifest.json створено в UzvarManifest/"
+echo "📋 UUID паку скопійовано в буфер!"
