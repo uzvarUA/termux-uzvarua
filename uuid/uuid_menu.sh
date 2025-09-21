@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
 clear
-echo -e "\e[1;32m UUID і manifest.json \e[pm"
+echo -e "\e[1;32m UUID і manifest.json \e[0m"
 # 🧪 Перевірка Python
 if ! command -v python &> /dev/null; then
   echo "⚠️ Python не знайдено! Встановлюю..."
