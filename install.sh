@@ -27,6 +27,7 @@ echo "2️⃣0️⃣ Встановлення Mr. Holmes"
 echo "2️⃣1️⃣ Запуск Mr. Holmes"
 echo "2️⃣2️⃣ Встановлення asciinema"
 echo "2️⃣3️⃣ UzvarUA UUID & manifest.json генератор"
+echo -e "\e[1;33m 2️⃣4️⃣ Створення панорами \e[0m"
 
 # Функція перевірки та запуску
 run_script() {
@@ -65,5 +66,6 @@ case "$opt" in
     21) run_script "robby/uzvarua.sh" ;;
     22) run_script "module/asciinema.sh" ;;
     23) run_script "uuid/uuid_menu.sh" ;;
+    24) run_script "uuid/ffmpeg.sh" ;;
     *) echo -e "\e[1;31m❌ Невірна опція. Спробуйте ще раз.\e[0m" ;;
 esac
