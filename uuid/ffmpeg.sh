@@ -33,7 +33,7 @@ while true; do
       read -p "▶️ Натисніть Enter, коли готові..."
 
       i=0
-      for file in input/*.jpg; do
+      for file in input/*.png; do
         out="textures/ui/${names[$i]}.png"
         echo -e "\e[1;34m🎬 Обрізка $file → $out\e[0m"
         ffmpeg -i "$file" -vf "crop=1024:1024" "$out"
