@@ -1,46 +1,77 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-# 🌀 UzvarUA Panorama Generator
-# 🎮 For Minecraft Bedrock Edition on Android 13
+# 🌄 UzvarUA Panorama Maker for Minecraft Bedrock
+# 📅 Created: 2025-09-23
+# 🧃 Branded by Robby & Copilot
 
-# 🎨 Стиль
-BOLD="\e[1m"
-RESET="\e[0m"
-GREEN="\e[32m"
-RED="\e[31m"
-CYAN="\e[36m"
-MAGENTA="\e[35m"
+set -e
 
-echo -e "${MAGENTA}${BOLD}╔════════════════════════════════════╗"
-echo -e "║   🌀 UzvarUA Minecraft Panorama    ║"
-echo -e "╚════════════════════════════════════╝${RESET}"
+WORKDIR="$HOME/UzvarPanorama"
+names=(panorama_0 panorama_1 panorama_2 panorama_3 panorama_4 panorama_5)
 
-# 📁 Створення директорії
-mkdir -p panorama
+while true; do
+  clear
+  echo -e "\e[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[0m"
+  echo -e "\e[1;35m     🌄 UzvarUA Panorama Maker\e[0m"
+  echo -e "\e[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[0m"
+  echo -e "\e[1;32m 1️⃣ Створити панораму з JPG\e[0m"
+  echo -e "\e[1;31m 2️⃣ Вийти з меню\e[0m"
+  echo -e "\e[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[0m"
+  read -p "🔸 Виберіть дію: " choice
 
-# 📦 Перевірка source.png
-if [[ ! -f source.png ]]; then
-  echo -e "${RED}❌ source.png не знайдено. Помісти файл у поточну директорію.${RESET}"
-  exit 1
-fi
+  case "$choice" in
+    1)
+      mkdir -p "$WORKDIR/textures/ui" "$WORKDIR/input"
+      cd "$WORKDIR"
 
-# 🧩 Генерація граней з source.png
-echo -e "${CYAN}🔧 Генеруємо граней з source.png...${RESET}"
+      command -v ffmpeg >/dev/null 2>&1 || {
+        echo -e "\e[1;31m❌ ffmpeg не встановлено. Встановлюємо...\e[0m"
+        pkg update && pkg install ffmpeg -y
+      }
 
-ffmpeg -i source.png -vf "crop=1024:1024:0:512"     panorama/panorama_0.png   # Left
-ffmpeg -i source.png -vf "crop=1024:1024:1024:512"  panorama/panorama_1.png   # Front
-ffmpeg -i source.png -vf "crop=1024:1024:2048:512"  panorama/panorama_2.png   # Right
-ffmpeg -i source.png -vf "crop=1024:1024:3072:512"  panorama/panorama_3.png   # Back
-ffmpeg -i source.png -vf "crop=1024:1024:1024:0"    panorama/panorama_4.png   # Top
-ffmpeg -i source.png -vf "crop=1024:1024:1024:1024" panorama/panorama_5.png   # Bottom
+      echo -e "\e[1;33m📸 Вставте 6 .jpg зображень у $WORKDIR/input перед запуском.\e[0m"
+      read -p "▶️ Натисніть Enter, коли готові..."
 
-# 🌀 Додатково: якщо є файли типу 0.png, 1.png…
-for i in {0..5}; do
-  if [[ -f "${i}.png" ]]; then
-    echo -e "${GREEN}📸 Знайдено ${i}.png — генеруємо panorama_${i}.png...${RESET}"
-    ffmpeg -i "${i}.png" -vf "crop=1024:1024:0:512" "panorama/panorama_${i}.png"
-  fi
+      i=0
+      for file in input/*.jpg; do
+        out="textures/ui/${names[$i]}.png"
+        echo -e "\e[1;34m🎬 Обрізка $file → $out\e[0m"
+        ffmpeg -i "$file" -vf "crop=1024:1024" "$out"
+        ((i++))
+      done
+
+      cat > manifest.json <<EOF
+{
+  "format_version": 2,
+  "header": {
+    "name": "UzvarUA Panorama",
+    "description": "Custom Minecraft menu background",
+    "uuid": "$(uuidgen)",
+    "version": [1, 0, 0]
+  },
+  "modules": [{
+    "type": "resources",
+    "uuid": "$(uuidgen)",
+    "version": [1, 0, 0]
+  }]
+}
+EOF
+
+      ZIPNAME="UzvarPanorama.mcpack"
+      echo -e "\e[1;32m📦 Упаковка у $ZIPNAME...\e[0m"
+      zip -r "$ZIPNAME" manifest.json textures
+
+      echo -e "\e[1;32m✅ Панорама створена: $WORKDIR/$ZIPNAME\e[0m"
+      echo -e "\e[1;36m📲 Відкрийте файл через Minecraft для імпорту\e[0m"
+      read -p "🔸 Натисніть Enter для повернення в меню..."
+      ;;
+    2)
+      echo -e "\e[1;31m👋 До зустрічі, UzvarUA!\e[0m"
+      break
+      ;;
+    *)
+      echo -e "\e[1;31m⚠️ Невірний вибір. Спробуйте ще раз.\e[0m"
+      sleep 1
+      ;;
+  esac
 done
-
-# ✅ Завершено
-echo -e "${GREEN}${BOLD}✅ Панорама готова в ./panorama${RESET}"
