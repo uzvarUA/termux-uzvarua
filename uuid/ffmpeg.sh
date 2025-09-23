@@ -40,18 +40,23 @@ while true; do
         ((i++))
       done
 
+      # 🧠 UUID через Python
+      uuidgen=$(python -c "import uuid; print(uuid.uuid4())")
+      uuidgen2=$(python -c "import uuid; print(uuid.uuid4())")
+
+      # 🧾 Створення manifest.json
       cat > manifest.json <<EOF
 {
   "format_version": 2,
   "header": {
     "name": "UzvarUA Panorama",
     "description": "Custom Minecraft menu background",
-    "uuid": "$(uuidgen)",
+    "uuid": "$uuidgen",
     "version": [1, 0, 0]
   },
   "modules": [{
     "type": "resources",
-    "uuid": "$(uuidgen)",
+    "uuid": "$uuidgen2",
     "version": [1, 0, 0]
   }]
 }
