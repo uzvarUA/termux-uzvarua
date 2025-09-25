@@ -1,5 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
-
+set -eu
 # Функція перевірки та запуску
 run_script() {
     local path="$1"
