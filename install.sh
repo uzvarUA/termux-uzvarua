@@ -71,7 +71,7 @@ while true; do
         23) run_script "uuid/uuid_menu.sh" ;;
         24) run_script "uuid/ffmpeg.sh" ;;
         25) run_script "otolaryngologist/otolaryngologist.sh" ;;
-        26) run_script "module/grip.sh"
+        26) run_script "module/grip.sh" ;;
         *) echo -e "\e[1;31m❌ Невірна опція. Спробуйте ще раз.\e[0m" ;;
     esac
 
