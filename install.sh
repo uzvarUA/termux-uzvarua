@@ -7,7 +7,7 @@ run_script() {
         echo -e "\e[1;34m▶ Запуск: $path\e[0m"
         bash "$path"
     else
-        echo -e "\e[1;31m❌ Модуль не знайдено: $path\e[0m"
+        echo -e "\e[1;31m❌ Модуль не знайдено: $path\e[0m" >> robbyivanov.log
     fi
 }
 
