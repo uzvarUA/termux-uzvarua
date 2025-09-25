@@ -42,7 +42,7 @@ while true; do
     echo -e "\e[1;33m2️⃣4️⃣ Створення панорами за допомогою ffmpeg \e[0m"
     echo -e "\e[1;32m2️⃣5️⃣ Продування вуха \e[0m"
 
-    read -p "👉 Виберіть опцію: " opt
+    read -p "👉 Виберіть опцію: " opt || continue
     case "$opt" in
         0) run_script "module/bc.sh" ;;
         1) run_script "module/update.sh" ;;
