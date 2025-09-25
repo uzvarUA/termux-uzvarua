@@ -41,6 +41,7 @@ while true; do
     echo "2️⃣3️⃣ UzvarUA UUID & manifest.json генератор"
     echo -e "\e[1;33m2️⃣4️⃣ Створення панорами за допомогою ffmpeg \e[0m"
     echo -e "\e[1;32m2️⃣5️⃣ Продування вуха \e[0m"
+    echo "2️⃣6️⃣ Встановлення GRIP"
 
     read -p "👉 Виберіть опцію: " opt || continue
     case "$opt" in
@@ -70,6 +71,7 @@ while true; do
         23) run_script "uuid/uuid_menu.sh" ;;
         24) run_script "uuid/ffmpeg.sh" ;;
         25) run_script "otolaryngologist/otolaryngologist.sh" ;;
+        26) run_script "module/grip.sh"
         *) echo -e "\e[1;31m❌ Невірна опція. Спробуйте ще раз.\e[0m" ;;
     esac
 
