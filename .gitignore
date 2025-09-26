@@ -1,0 +1,52 @@
+# 🌟 UzvarUA .gitignore для Termux Bash меню
+
+# Логи виконання
+*.log
+
+# Тимчасові файли та кеш
+*.tmp
+*.bak
+*.swp
+.cache/
+__pycache__/
+
+# IDE та редактори
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Відео та аудіо файли (якщо генеруєш)
+*.mp4
+*.mkv
+*.webm
+*.mp3
+*.wav
+
+# Завантаження з Reddit, TikTok тощо
+download/
+video/output/
+tikttok/downloads/
+
+# UUID генератор — тимчасові файли
+uuid/*.json
+uuid/*.mcmeta
+uuid/*.mcpack
+
+# Конфіденційні дані
+.env
+config.json
+secrets.txt
+
+# Кеші Termux
+$PREFIX/tmp/
+$HOME/.termux/
+
+# УзварUA специфічне
+otolaryngologist/*.tmp
+start/*.log
+module/*.log
+robbyivanov.log
+
+# Не додавати сам .gitignore до ігнорування :)
+!.gitignore
