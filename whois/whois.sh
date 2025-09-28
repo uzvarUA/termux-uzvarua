@@ -33,6 +33,11 @@ read -r domain || {
 echo -e "\n📡 Виконується WHOIS-запит для: $domain\n"
 whois_output=$(whois "$domain")
 
+[[ -z "$whois_output" ]] && {
+  echo "❌ WHOIS-запит не повернув даних"
+  exit 1
+}
+
 # 🧠 Витягуємо дату створення
 creation_date=$(echo "$whois_output" | grep -iE 'Creation Date:' | head -n 1 | awk '{print $NF}')
 
