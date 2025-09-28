@@ -1,6 +1,11 @@
 #!/data/data/com.termux/files/usr/bin/bash
 set -euo pipefail
 
+python3 -c "import grip" 2>/dev/null || {
+  echo "⚠️ Модуль grip не знайдено. Встанови його через: pip install grip"
+  exit 1
+}
+
 command -v whois >/dev/null 2>&1 || {
   echo "❌ whois не знайдено. Встанови його через: pkg install whois"
   exit 1
@@ -50,5 +55,10 @@ report="uzvar-whois-$domain.md"
   echo '```'
 } > "$report"
 
+uzvar_ua() {
+  python3 -m grip "$report"
+}
+
 echo -e "\n✅ Звіт збережено у: $report"
 echo -e "📖 Переглянь його у Markdown-редакторі або через \`cat $report\`\n"
+uzvar_ua
