@@ -5,8 +5,8 @@ set -euo pipefail
 clear
 echo -e "\n🎬 \e[1mUzvarUA Silent Cinema\e[0m — перетвори будь-яке відео на ретро-шедевр\n"
 
-python3 -c "import yt-dlp" 2>/dev/null || {
-  echo "⚠️ Модуль grip не знайдено. Встанови його через: pip3 install yt-dlp"
+command -v yt-dlp 2>/dev/null || {
+  echo "⚠️ Модуль grip не знайдено. Встанови його через: pip install yt-dlp"
   exit 1
 }
 
