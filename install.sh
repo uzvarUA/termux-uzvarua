@@ -43,6 +43,7 @@ while true; do
     echo -e "\e[1;32m2️⃣5️⃣ Продування вуха \e[0m"
     echo "2️⃣6️⃣ Встановлення GRIP"
     echo "2️⃣7️⃣ Запуск WHOIS"
+    echo "2️⃣8️⃣ Німе кіно з YouTube"
 
     read -p "👉 Виберіть опцію: " opt || continue
     case "$opt" in
@@ -74,6 +75,7 @@ while true; do
         25) run_script "otolaryngologist/otolaryngologist.sh" ;;
         26) run_script "module/grip.sh" ;;
         27) run_script "whois/whois.sh" ;;
+        28) run_script "YouTube/YouTube.sh" ;;
         *) echo -e "\e[1;31m❌ Невірна опція. Спробуйте ще раз.\e[0m" ;;
     esac
 
