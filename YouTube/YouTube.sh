@@ -11,7 +11,7 @@ python3 -c "import yt-dlp" 2>/dev/null || {
 }
 
 command -v ffmpeg >/dev/null 2>&1 || {
-  echo "❌ whois не знайдено. Встанови його через: pkg install ffmpeg"
+  echo "❌ ffmpeg не знайдено. Встанови його через: pkg install ffmpeg"
   exit 1
 }
 
