@@ -41,7 +41,7 @@ ffmpeg -i "$UZVARUA" \
 -vf "format=gray, fps=16, noise=alls=20:allf=t+u, eq=contrast=1.5:brightness=0.05, vignette" \
 -an "$UZVARUA2"
 
-UZVARUA_3="silent_with_music_$(date +s).mp4"
+UZVARUA_3="silent_with_music_$(date +%s).mp4"
 # 🔹 Вибір музики
 echo -e "\n🎼 Обери музичний супровід:"
 echo "1) Glass Chinchilla — The Mini Vandals"
