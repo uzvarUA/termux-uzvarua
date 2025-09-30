@@ -26,19 +26,22 @@ read -p "🔗 Встав URL відео з YouTube: " URL || {
   exit 1
 }
 
+UZVARUA="input_$(date +%s).mp4"
 # 🔹 Завантаження відео
 echo -e "\n⬇️ Завантажую відео..."
-yt-dlp -f bestvideo+bestaudio --merge-output-format mp4 -o "input.mp4" "$URL" || {
+yt-dlp -f bestvideo+bestaudio --merge-output-format mp4 -o "$UZVARUA" "$URL" || {
   echo "Не вдалося завантажити"
   exit 1
 }
 
+UZVARUA2="silent_film_$(date +%s).mp4"
 # 🔹 Стилізація під німе кіно
 echo -e "\n🎞️ Стилізую відео у стилі 1920-х..."
-ffmpeg -i input.mp4 \
+ffmpeg -i "$UZVARUA" \
 -vf "format=gray, fps=16, noise=alls=20:allf=t+u, eq=contrast=1.5:brightness=0.05, vignette" \
--an silent_film.mp4
+-an "$UZVARUA2"
 
+UZVARUA_3="silent_with_music_$(date +s).mp4"
 # 🔹 Вибір музики
 echo -e "\n🎼 Обери музичний супровід:"
 echo "1) Glass Chinchilla — The Mini Vandals"
@@ -52,7 +55,7 @@ if [[ "$MUSIC" == "1" ]]; then
         exit 1
     fi
     echo -e "\n🎹 Додаю музичний супровід..."
-    ffmpeg -i silent_film.mp4 -i glass_chinchilla.mp3 -c:v copy -c:a aac -shortest silent_with_music.mp4
+    ffmpeg -i "$UZVARUA2" -i glass_chinchilla.mp3 -c:v copy -c:a aac -shortest "$UZVARUA_3"
     echo -e "\n✅ Готово: \e[1msilent_with_music.mp4\e[0m"
 else
     echo -e "\n✅ Готово: \e[1msilent_film.mp4\e[0m"
